@@ -2,11 +2,13 @@
 
 #define _STRING_
 
-#include "String.h"
 #include <iostream>
 #include <cctype>
 #include <limits.h>
-#include "string.h"
+#include <string>
+
+#include "String.h"
+//#include "string.h"
 
 //	Constructors and Destructor--------------------------------------
 
@@ -98,7 +100,7 @@ bool String::EqualTo(char *_str) const
 //	Returns true if all char values in the char array pointer
 //	*str are the same, returns true. Otherwise returns false.
 {
-	for (int i = 0; i < length; i++)
+	for (size_t i = 0; i < length; i++)
 	{
 		if (_str[i] != str[i])
 		{
@@ -220,9 +222,9 @@ int String::Find(size_t _startIndex, const String& _str)
 {
 	size_t _len_t = _str.Length();
 
-	int _len = static_cast<int>(_len_t);
+	//int _len = static_cast<int>(_len_t);
 
-	if (_len > length)
+	if (_len_t > length)
 	{
 		return -1;
 	}
@@ -336,8 +338,13 @@ String& String::ReadFromConsole()
 
 	char* inStr = new char[64];
 
-	std::cout << "Type new string into command line: ";
-	std::cin >> inStr;
+	//std::string strHolderX;
+
+	//std::cout << "Type new string into command line: ";
+
+	//std::getline(std::cin, strHolderX);
+
+	std::cin >> inStr;	//This original solution (replaced immideatly above) can accept spaces.
 
 	length = strlen(inStr);
 	if (capacity < length + 1)
@@ -389,7 +396,7 @@ String& String::operator=(const String& _str)
 	//strcpy_s(str, capacity, _str.str);
 
 	//
-	for (int i = 0; i < length; i++)
+	for (size_t i = 0; i < length; i++)
 	{
 		str[i] = _str[i];
 	}
