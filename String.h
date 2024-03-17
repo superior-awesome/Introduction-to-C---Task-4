@@ -1,6 +1,12 @@
 #pragma once
 #ifndef CUSTOM_STRING_HEADER
 #define CUSTOM_STRING_HEADER
+
+
+#include <iostream>
+#include <cctype>
+#include <limits.h>
+
 class String
 {
 public:

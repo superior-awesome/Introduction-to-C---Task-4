@@ -3,9 +3,11 @@
 #define _GAME_
 
 #include <iostream>
+//#include <string>
 
 #include "Room.h"
 #include "Player.h"
+
 
 class Game
 {

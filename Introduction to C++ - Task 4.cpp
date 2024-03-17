@@ -2,14 +2,20 @@
 //
 
 #include <iostream>
-
+#include <string>
 #include "header.h"
 
 
 int main()
 {
 
+    //std::string strHolderX;
 
+    //std::cout << "Input the string with a space: ";
+
+    //getline(std::cin, strHolderX);
+
+    //std::cout << "String is: " << strHolderX;
     Game currentGame;
 
     currentGame.Run();

@@ -4,6 +4,7 @@
 
 #include "String.h"
 #include "structs.h"
+#include <string>
 
 class Player
 {
@@ -23,9 +24,10 @@ public:
 
 	String FindSpell();
 
+	String command;
+
 private:
 
-	String command;
 	String spells[10];
 	Vector2 currentLocation;
 

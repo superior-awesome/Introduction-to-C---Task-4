@@ -61,7 +61,9 @@ int Game::GetCommand()
 	
 #ifdef _DEBUG_
 	std::cout << "GETCOMMAND fired" << std::endl;
+	std::cout << "Type new string into command line: ";
 #endif
+
 
 	player->ReadFromConsoleToCommand();
 	String commandHolder = player->ReadFromCommandToString();

@@ -32,7 +32,16 @@ void Player::SetCurrentLocation(Vector2 _newLoc)
 
 void Player::ReadFromConsoleToCommand()
 {
-	command.ReadFromConsole();
+
+	std::string strHolderBase;
+	getline(std::cin, strHolderBase);
+	char arr[64];
+	std::cout << sizeof(arr) << std::endl;
+	strcpy_s(arr, sizeof(arr), strHolderBase.c_str());
+	String tempStr(arr);
+
+	command = tempStr;
+
 	std::cout << "->";
 	command.WriteToConsole();
 	std::cout << std::endl;

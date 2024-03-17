@@ -2,13 +2,13 @@
 
 #define _STRING_
 
-#include <iostream>
-#include <cctype>
-#include <limits.h>
-#include <string>
+#ifndef _DEBUG_
+#define _DEBUG_
+#endif // !_DEBUG_
+
 
 #include "String.h"
-//#include "string.h"
+
 
 //	Constructors and Destructor--------------------------------------
 
@@ -338,11 +338,12 @@ String& String::ReadFromConsole()
 
 	char* inStr = new char[64];
 
-	//std::string strHolderX;
+	std::string strHolderX;
 
-	//std::cout << "Type new string into command line: ";
+#ifdef _DEBUG_
+	std::cout << "Type new string into command line: ";
+#endif
 
-	//std::getline(std::cin, strHolderX);
 
 	std::cin >> inStr;	//This original solution (replaced immideatly above) can accept spaces.
 
