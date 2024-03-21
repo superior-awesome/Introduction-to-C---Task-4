@@ -13,6 +13,10 @@ public:
 
 	Player();
 	~Player();
+	Player& operator= (const Player other);
+	Player(Player&& other);
+
+	Player(const Player& other);
 	
 	void StartGame();
 
@@ -27,6 +31,8 @@ public:
 	String command;
 
 private:
+
+	const int noOfSpells = 10;
 
 	String spells[10];
 	Vector2 currentLocation;

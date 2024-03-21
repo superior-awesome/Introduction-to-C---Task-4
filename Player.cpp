@@ -7,12 +7,45 @@ Player::Player()
 	currentLocation = {1,1};
 	String intitiator("Empty");
 	command = intitiator;
+
 }
 
+//	Destructor
+Player::~Player() = default;
 
-Player::~Player()
+//	Copy Constructor
+Player::Player(const Player& other)
 {
+	currentLocation = other.currentLocation;
 
+	for (int i = 0; i < noOfSpells; i++)
+	{
+		spells[i] = other.spells[i];
+	}
+}
+
+//Copy Assignmnet
+Player& Player::operator= (const Player other)
+{
+	currentLocation = other.currentLocation;
+
+	for (int i = 0; i < noOfSpells; i++)
+	{
+		spells[i] = other.spells[i];
+	}
+
+	return *this;
+}
+
+//	Move
+Player::Player(Player&& other)
+{
+	currentLocation = other.currentLocation;
+
+	for (int i = 0; i < noOfSpells; i++)
+	{
+		spells[i] = other.spells[i];
+	}
 }
 
 void Player::StartGame()

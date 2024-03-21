@@ -23,12 +23,18 @@ String::String()
 String::String(const char* _str)
 //	Constructor takes a pointer to a C-Style string.
 {
+
+
 	length = strlen(_str);
 	capacity = length + 1;
 	str = new char[capacity];
 	strcpy_s(str, capacity, _str);
-};
 
+#ifdef _DEBUG_
+	std::cout << length << "<--" << std::endl;
+#endif
+
+};
 String::String(const String& _other)
 //	Copy Constructor.
 {
@@ -389,6 +395,8 @@ bool String::operator!=(const String& _other)
 String& String::operator=(const String& _str)
 //	Overloads the = operator to copy the rhs object to the lhs object.
 {
+
+	std::cout << length <<  _str.str << " - " <<_str.length << std::endl;
 	length = _str.length;
 	capacity = _str.capacity;
 

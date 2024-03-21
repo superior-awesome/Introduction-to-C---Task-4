@@ -5,51 +5,27 @@
 #include <string>
 #include "header.h"
 
-
 int main()
 {
-
-    //std::string strHolderX;
-
-    //std::cout << "Input the string with a space: ";
-
-    //getline(std::cin, strHolderX);
-
-    //std::cout << "String is: " << strHolderX;
+ 
     Game currentGame;
 
-    currentGame.Run();
+   // String testStr("test");
+   //bool bcheck = testStr.EqualTo("tesdt");
 
-    String testStr("test");
-    bool bcheck = testStr.EqualTo("tesdt");
-
-    std::cout << "----> " << bcheck << std::endl;
-
+   // std::cout << "----> " << bcheck << std::endl;
 
     bool gameRunning = true;
+
+    Room rHolder = currentGame.GetRoomObject({1,1});
+    rHolder.useItem();
+
+
 
     while (gameRunning)
     {
         currentGame.Tick();
     }
     
-
-
     return 0;
 }
-
-
-
-
-
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

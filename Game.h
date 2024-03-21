@@ -15,6 +15,12 @@ class Game
 public:
 	Game();
 	~Game();
+	Game(const Game& other);
+
+	Game& operator=(const Game& other);
+	Game(Game&& other);
+	Game& operator= (Game&& other);
+
 	void Run();
 
 	int Tick();
@@ -28,14 +34,17 @@ public:
 
 	int MovePlayer();
 
+	const Room GetRoomObject(const Vector2 vec2);
+
+	int UseRoomItem(Room* _room);
+
 private:
-	Player *player;
 
 	const int mapWidth = 3;
 	const int mapHeight = 3; 
 
+	Player *player;
 	Room map[3][3];
-
 
 };	
 

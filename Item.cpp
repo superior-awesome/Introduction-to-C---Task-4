@@ -7,19 +7,14 @@ Item::Item()
 
 }
 
-Item::~Item()
-{
+Item::~Item() = default;
 
+Item& Item::operator= (const Item& other)
+{
+	descriptionText = other.descriptionText;
+
+	return *this;
 }
-
-/*
-Item::Item(const Item& _other)
-//	Copy Constructor.
-{
-	
-};
-
-*/
 
 
 void Item::Description() {

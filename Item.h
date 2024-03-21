@@ -9,6 +9,7 @@ public:
 
 	Item();
 	~Item();
+	Item& operator= (const Item& other);
 
 	void Description();
 	void Use();
