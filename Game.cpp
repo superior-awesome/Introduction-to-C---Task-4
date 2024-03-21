@@ -111,9 +111,11 @@ void Game::CreateMap()
 	{
 		for (int j = 0; j < mapWidth; j++)
 		{
+			std::cout << i << "," << j << std::endl;
 			String *tempDesc = new String("TEMP");
 			Item *tempItem = new Item();
 			Vector2 tempV2 = { i,j };
+
 
 			Room rHolder = Room(tempDesc, tempItem, tempV2);
 
@@ -121,6 +123,7 @@ void Game::CreateMap()
 
 		}
 	}
+	std::cout << "ALL DONE" << std::endl;
 	//map = &MapHolder;
 }
 
@@ -157,8 +160,8 @@ int Game::GetCommand()
 	
 #ifdef _DEBUG_
 	std::cout << "GETCOMMAND fired" << std::endl;
-	std::cout << "Type new string into command line: ";
 #endif
+	std::cout << "Type new string into command line: ";
 
 
 	player->ReadFromConsoleToCommand();

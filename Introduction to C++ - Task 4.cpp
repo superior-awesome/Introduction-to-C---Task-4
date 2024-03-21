@@ -18,14 +18,11 @@ int main()
     bool gameRunning = true;
 
     Room rHolder = currentGame.GetRoomObject({1,1});
+
+    rHolder.useItem();
     rHolder.useItem();
 
 
 
-    while (gameRunning)
-    {
-        currentGame.Tick();
-    }
-    
     return 0;
 }

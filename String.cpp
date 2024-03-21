@@ -31,7 +31,7 @@ String::String(const char* _str)
 	strcpy_s(str, capacity, _str);
 
 #ifdef _DEBUG_
-	std::cout << length << "<--" << std::endl;
+	//std::cout << length << "<--" << std::endl;
 #endif
 
 };
@@ -396,20 +396,26 @@ String& String::operator=(const String& _str)
 //	Overloads the = operator to copy the rhs object to the lhs object.
 {
 
-	std::cout << length <<  _str.str << " - " <<_str.length << std::endl;
+	//std::cout << length <<  _str.str << " - " <<_str.length << std::endl;
+
+	if (length < _str.length)
+	{
+		delete str;
+		str = new char[_str.capacity];
+	}
+
 	length = _str.length;
 	capacity = _str.capacity;
 
-	delete str;
-	str = new char[capacity];
-	//strcpy_s(str, capacity, _str.str);
+	strcpy_s(str, capacity, _str.str);
 
-	//
+	/*
 	for (size_t i = 0; i < length; i++)
 	{
 		str[i] = _str[i];
 	}
 	str[length] = '\0';
+	*/
 
 	return *this;
 
