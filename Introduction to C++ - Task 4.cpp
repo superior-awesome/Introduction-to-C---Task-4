@@ -17,6 +17,13 @@ int main()
 
     bool gameRunning = true;
 
+    String MainString("Wow");
+
+    String SecondString;
+
+    SecondString = MainString;
+
+
     Room rHolder = currentGame.GetRoomObject({1,1});
 
     rHolder.useItem();

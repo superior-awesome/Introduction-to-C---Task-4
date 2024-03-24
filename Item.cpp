@@ -3,14 +3,18 @@
 Item::Item()
 {
 	
-	descriptionText = String("This is a empty Item");
-
+	descriptionText = new String("This is a empty Item");
+	
 }
 
-Item::~Item() = default;
+Item::~Item()
+{
+	delete[] descriptionText;
+};
 
 Item& Item::operator= (const Item& other)
 {
+
 	descriptionText = other.descriptionText;
 
 	return *this;

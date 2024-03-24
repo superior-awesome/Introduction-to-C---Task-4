@@ -12,7 +12,7 @@ class Room
 public:
 
 	Room();
-	Room(String* description, Item* item, Vector2 _roomLocation);
+	Room(String* description, Item* item, Vector2* _roomLocation);
 
 	~Room();
 	Room(const Room& other);
@@ -20,13 +20,17 @@ public:
 	Room& operator= (const Room&& other);
 	Room(Room&& other);
 
+	
+
 	int useItem();
+
 
 private:
 
-	Vector2 roomLocation;
-		
 	String *roomDesc;
+	
+	Vector2 *roomLocation;
+		
 	Item *itemInRoom;
 };
 

@@ -11,13 +11,14 @@
 Game::Game()
 {
 	player = new Player;
-	CreateMap();
+	map = new Room[mapWidth*mapHeight];
 }
 
 //	Destructor
 Game::~Game()
 {
 	delete player;
+	delete[] map;
 }
 
 
@@ -25,21 +26,30 @@ Game::~Game()
 Game::Game(const Game& other)
 {
 
+	player = new Player;
 	player = other.player;
+
+	map = new Room[mapWidth * mapHeight];
+	for (int i = 0; i < (mapWidth*mapHeight); i++)
+	{
+		map[i] = other.map[i];
+	}
 
 }
 
 //	Copy Assignment
 Game& Game::operator=(const Game& other)
 {
+	delete player;
+	player = new Player;
 	player = other.player;
 
-	for (int i = 0; i < mapWidth; i++)
+	delete[] map;
+	int MapSize = other.mapHeight * other.mapWidth;
+	map = new Room[MapSize];
+	for (int i = 0; i < (MapSize); i++)
 	{
-		for (int j = 0; j < mapHeight; j++)
-		{
-			map[i][j] = other.map[i][j];
-		}
+		map[i] = other.map[i];
 	}
 
 	return *this;
@@ -48,40 +58,39 @@ Game& Game::operator=(const Game& other)
 //	Move
 Game::Game(Game&& other)
 {
-	//			Q: Is there a way to trigger the other object to destroy itself?
-	player = other.player;
-	
-	//			Q: Isnt the other.player still in the heap somewhere, but not just unacessable?
-	other.player = nullptr;
 
-	for (int i = 0; i < mapWidth; i++)
+	player = new Player;
+	player = other.player;
+	delete other.player;
+
+
+	int MapSize = other.mapHeight * other.mapWidth;
+	map = new Room[MapSize];
+	for (int i = 0; i < (MapSize); i++)
 	{
-		for (int j = 0; j < mapHeight; j++)
-		{
-			map[i][j] = other.map[i][j];
-		}
+		map[i] = other.map[i];
 	}
+	delete[] other.map;
 
 }
 
 //	move Assignement
 Game& Game::operator= (Game&& other)
 {
-	//			Q: Is there a way to trigger the other object to destroy itself?
+
+	delete player;
+	player = new Player;
 	player = other.player;
+	delete other.player;
 
-	//			Q: Isnt the other.player still in the heap somewhere, but not just unacessable?
-	other.player = nullptr;
-
-	for (int i = 0; i < mapWidth; i++)
+	delete[] map;
+	int MapSize = other.mapHeight * other.mapWidth;
+	map = new Room[MapSize];
+	for (int i = 0; i < (MapSize); i++)
 	{
-		for (int j = 0; j < mapHeight; j++)
-		{
-
-			Room rHolder = other.map[i][j];
-			map[i][j] = rHolder;
-		}
+		map[i] = other.map[i];
 	}
+	delete[] other.map;
 
 	return *this;
 
@@ -104,7 +113,7 @@ int Game::Tick()
 }
 
 
-
+/*
 void Game::CreateMap()
 {
 	for (int i = 0; i < mapHeight; i++)
@@ -115,8 +124,6 @@ void Game::CreateMap()
 			String *tempDesc = new String("TEMP");
 			Item *tempItem = new Item();
 			Vector2 tempV2 = { i,j };
-
-
 			Room rHolder = Room(tempDesc, tempItem, tempV2);
 
 			map[i][j] = rHolder;
@@ -126,11 +133,17 @@ void Game::CreateMap()
 	std::cout << "ALL DONE" << std::endl;
 	//map = &MapHolder;
 }
+*/
 
 const Room Game::GetRoomObject(const Vector2 vec2) 
 {
 
-	Room rHolder = map[vec2.a][vec2.b];
+	int x = vec2.a;
+	int y = vec2.b;
+
+	size_t S = ((3 * x) + y);
+
+	Room rHolder(map[S]);
 
 	return rHolder;
 

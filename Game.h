@@ -44,7 +44,7 @@ private:
 	const int mapHeight = 3; 
 
 	Player *player;
-	Room map[3][3];
+	Room *map;
 
 };	
 

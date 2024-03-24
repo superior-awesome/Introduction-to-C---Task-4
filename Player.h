@@ -34,8 +34,9 @@ private:
 
 	const int noOfSpells = 10;
 
-	String spells[10];
-	Vector2 currentLocation;
+	String *spells;
+	
+	Vector2 *currentLocation;
 
 };
 

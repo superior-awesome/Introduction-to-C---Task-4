@@ -3,17 +3,26 @@
 
 Room::Room()
 {
-	roomLocation = { 0 };
+	roomLocation = new Vector2;
+	roomLocation->a = 0;
+	roomLocation->b = 0;
 
 	itemInRoom = new Item;	
-	roomDesc = new String("Empty Room.");
+
+	roomDesc = new String;
 }
 
-Room::Room(String* description, Item* item, Vector2 _roomLocation)
+Room::Room(String* description, Item* item, Vector2* _roomLocation)
 {
-	roomLocation = _roomLocation;
 
+	roomLocation = new Vector2;
+	roomLocation->a = (*_roomLocation).a;
+	roomLocation->b = (*_roomLocation).b;
+
+	itemInRoom = new Item;
 	itemInRoom = item;
+
+	roomDesc = new String;
 	roomDesc = description;
 
 }
@@ -22,24 +31,39 @@ Room::Room(String* description, Item* item, Vector2 _roomLocation)
 Room::~Room()
 {
 	delete roomDesc;
+
+	delete roomLocation;
+
 	delete itemInRoom;
 }
 
 //	Copy Constructor
 Room::Room(const Room& other)
 {
-	roomLocation = other.roomLocation;
-	(*roomDesc) = (*other.roomDesc);
-	(*itemInRoom) = (*other.itemInRoom);
+
+	roomLocation = new Vector2;
+	roomLocation->a = other.roomLocation->a;
+	roomLocation->b = other.roomLocation->b;
+
+	
+
+	itemInRoom = new Item;
+	itemInRoom = other.itemInRoom;
+	roomDesc = new String;
+	roomDesc = other.roomDesc;	//This is the point of failure.
 }
 
 //	Copy Operator
 Room& Room::operator= (const Room& other)
 {
-	roomLocation = other.roomLocation;
-	(*roomDesc) = (*other.roomDesc);
-	Item iHolder = (*other.itemInRoom);
-	(*itemInRoom) = iHolder;
+	roomLocation->a = other.roomLocation->a;
+	roomLocation->b = other.roomLocation->b;
+
+	roomDesc = other.roomDesc;	//This is the point of failure.
+	//Item iHolder = (*other.itemInRoom);
+	//itemInRoom = iHolder;
+
+	itemInRoom = other.itemInRoom;
 
 	return *this;
 }
@@ -47,9 +71,15 @@ Room& Room::operator= (const Room& other)
 //	Move
 Room::Room(Room&& other)
 {
+
+	roomLocation = new Vector2;
 	roomLocation = other.roomLocation;
-	(*roomDesc) = (*other.roomDesc);
-	(*itemInRoom) = (*other.itemInRoom);
+	
+	itemInRoom = new Item;
+	itemInRoom = other.itemInRoom;
+
+	roomDesc = new String;
+	roomDesc = other.roomDesc;
 
 }
 
@@ -59,4 +89,5 @@ int Room::useItem()
 	
 	return 0;
 }
+
 

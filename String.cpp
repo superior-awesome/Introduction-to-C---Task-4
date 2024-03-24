@@ -47,6 +47,8 @@ String::String(const String& _other)
 String::~String()
 //	Destructor.
 {
+
+	std::cout << "Desctroctor Run" << std::endl;
 	delete[] str;
 };
 
@@ -323,7 +325,7 @@ String& String::Replace(const String& _find, const String& _replace)
 
 	//	Replaces old str with new str and mannages memmory.
 
-	delete str;
+	delete[] str;
 	str = new char[capacity];
 	strcpy_s(str, capacity, nStr);
 	delete[] nStr;

@@ -4,9 +4,11 @@
 
 Player::Player()
 {
-	currentLocation = {1,1};
+	currentLocation = new Vector2;
 	String intitiator("Empty");
 	command = intitiator;
+
+	spells = new String[noOfSpells];
 
 }
 
@@ -55,12 +57,13 @@ void Player::StartGame()
 
 Vector2 Player::GetCurrentLocation()
 {
-	return currentLocation;
+	return (*currentLocation);
 }
 
 void Player::SetCurrentLocation(Vector2 _newLoc)
 {
-	currentLocation = _newLoc;
+	currentLocation->a = _newLoc.a;
+	currentLocation->b = _newLoc.b;
 }
 
 void Player::ReadFromConsoleToCommand()

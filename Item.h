@@ -15,7 +15,7 @@ public:
 	void Use();
 private:
 
-	String descriptionText;
+	String *descriptionText;
 
 };
 
