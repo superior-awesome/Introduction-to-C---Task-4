@@ -17,10 +17,11 @@ public:
 	~Room();
 	Room(const Room& other);
 	Room& operator= (const Room& other);
-	Room& operator= (const Room&& other);
+	Room& operator= (Room&& other);
 	Room(Room&& other);
 
-	
+
+	void describeRoom();
 
 	int useItem();
 
@@ -29,9 +30,9 @@ private:
 
 	String *roomDesc;
 	
-	Vector2 *roomLocation;
-		
 	Item *itemInRoom;
+		
+	Vector2 *roomLocation;
 };
 
 #endif //_ROOM_

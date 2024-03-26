@@ -28,20 +28,22 @@ public:
 	void CreateMap();
 
 	int GetMapHeight();
+
 	int GetMapWidth();
 
 	int GetCommand();
 
 	int MovePlayer();
 
-	const Room GetRoomObject(const Vector2 vec2);
+	Room* GetRoomObject(const Vector2 vec2);
 
 	int UseRoomItem(Room* _room);
 
+
 private:
 
-	const int mapWidth = 3;
-	const int mapHeight = 3; 
+	const int mapWidth = 1;
+	const int mapHeight = 2; 
 
 	Player *player;
 	Room *map;

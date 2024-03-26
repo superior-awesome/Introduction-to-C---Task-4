@@ -8,12 +8,9 @@
 int main()
 {
  
+    std::cout << "Hello World." << std::endl;
+
     Game currentGame;
-
-   // String testStr("test");
-   //bool bcheck = testStr.EqualTo("tesdt");
-
-   // std::cout << "----> " << bcheck << std::endl;
 
     bool gameRunning = true;
 
@@ -21,15 +18,15 @@ int main()
 
     String SecondString;
 
-    SecondString = MainString;
+   // SecondString = MainString;
 
 
-    Room rHolder = currentGame.GetRoomObject({1,1});
+    Room* rHolder = currentGame.GetRoomObject({ 1,1 });; 
 
-    rHolder.useItem();
-    rHolder.useItem();
+    rHolder->useItem();
 
 
+    std::cout << "Goodbye World." << std::endl;
 
     return 0;
 }

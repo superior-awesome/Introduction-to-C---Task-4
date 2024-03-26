@@ -3,15 +3,23 @@
 Item::Item()
 {
 	
-	descriptionText = new String("This is a empty Item");
+	descriptionText = new String("EmptyItem");
 	
 }
 
+// Destructor
 Item::~Item()
 {
-	delete[] descriptionText;
+	delete descriptionText;
 };
 
+//	Copy constructor
+Item::Item(Item& other)
+{
+	descriptionText = other.descriptionText;
+}
+
+//	Copy operator
 Item& Item::operator= (const Item& other)
 {
 
@@ -20,9 +28,30 @@ Item& Item::operator= (const Item& other)
 	return *this;
 }
 
+//	Move Constructor
+Item::Item(Item&& other)
+{
+	descriptionText = new String;
+	descriptionText = other.descriptionText;
+	other.descriptionText = nullptr;
+}
+
+//	Move Operator
+Item& Item::operator= (Item&& other)
+{
+
+	descriptionText = other.descriptionText;
+	other.descriptionText = nullptr;
+
+	return *this;
+}
+
+
 
 void Item::Description() {
-
+	std::cout << "Item Being Described: ";
+	descriptionText->WriteToConsole();
+	std::cout << std::endl;
 }
 
 void Item::Use() {

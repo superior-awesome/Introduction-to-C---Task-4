@@ -18,25 +18,25 @@ public:
 
 	Player(const Player& other);
 	
-	void StartGame();
-
-	Vector2 GetCurrentLocation();
+	Vector2 GetCurrentLocation() const;
 	void SetCurrentLocation(Vector2 _newLoc);
 
-	void ReadFromConsoleToCommand();
-	const String ReadFromCommandToString();
+	void WriteFromConsoleToCommand();
+	void ReadCommandToCout() const;
 
 	String FindSpell();
 
-	String command;
+	String GetCommand() const;
 
 private:
 
-	const int noOfSpells = 10;
+	int noOfSpells = 3;
 
-	String *spells;
-	
 	Vector2 *currentLocation;
+
+	String *command;
+	
+	String *spells;
 
 };
 

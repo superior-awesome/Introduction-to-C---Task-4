@@ -6,12 +6,26 @@
 
 #include "Game.h"
 
-
-
 Game::Game()
 {
 	player = new Player;
-	map = new Room[mapWidth*mapHeight];
+
+	const int numberOfRooms = mapWidth * mapHeight;
+	
+
+
+	map = new Room[4];
+	
+	//map = new Room[numberOfRooms];
+
+	for (int i = 0; i < numberOfRooms; i++)
+	{
+		map[i].describeRoom();
+	}
+
+	//map = mapHolder;
+
+	std::cout << "X" << std::endl;
 }
 
 //	Destructor
@@ -29,8 +43,10 @@ Game::Game(const Game& other)
 	player = new Player;
 	player = other.player;
 
-	map = new Room[mapWidth * mapHeight];
-	for (int i = 0; i < (mapWidth*mapHeight); i++)
+	size_t mapSize = other.mapWidth * other.mapHeight;
+
+	map = new Room[mapSize];
+	for (size_t i = 0; i < mapSize; i++)
 	{
 		map[i] = other.map[i];
 	}
@@ -40,18 +56,21 @@ Game::Game(const Game& other)
 //	Copy Assignment
 Game& Game::operator=(const Game& other)
 {
-	delete player;
+
+	if (player != nullptr)
+	{
+		delete player;
+	}
 	player = new Player;
 	player = other.player;
 
-	delete[] map;
 	int MapSize = other.mapHeight * other.mapWidth;
 	map = new Room[MapSize];
 	for (int i = 0; i < (MapSize); i++)
 	{
 		map[i] = other.map[i];
 	}
-
+	
 	return *this;
 }
 
@@ -59,18 +78,12 @@ Game& Game::operator=(const Game& other)
 Game::Game(Game&& other)
 {
 
-	player = new Player;
 	player = other.player;
-	delete other.player;
+	other.player = nullptr;
 
+	map = other.map;
+	other.map = nullptr;
 
-	int MapSize = other.mapHeight * other.mapWidth;
-	map = new Room[MapSize];
-	for (int i = 0; i < (MapSize); i++)
-	{
-		map[i] = other.map[i];
-	}
-	delete[] other.map;
 
 }
 
@@ -78,19 +91,11 @@ Game::Game(Game&& other)
 Game& Game::operator= (Game&& other)
 {
 
-	delete player;
-	player = new Player;
 	player = other.player;
-	delete other.player;
+	other.player = nullptr;
 
-	delete[] map;
-	int MapSize = other.mapHeight * other.mapWidth;
-	map = new Room[MapSize];
-	for (int i = 0; i < (MapSize); i++)
-	{
-		map[i] = other.map[i];
-	}
-	delete[] other.map;
+	map = other.map;
+	other.map = nullptr;
 
 	return *this;
 
@@ -107,43 +112,57 @@ int Game::Tick()
 #ifdef _DEBUG_
 	std::cout << "TICK fired" << std::endl;
 #endif
-	GetCommand();
+
 
 	return 0;
 }
 
 
-/*
+
 void Game::CreateMap()
 {
-	for (int i = 0; i < mapHeight; i++)
+	int mapSize = mapWidth * mapHeight;
+	for (int i = 0; i < mapSize; i++)
 	{
 		for (int j = 0; j < mapWidth; j++)
 		{
+			size_t mapIndex = (i * 3 + j);
+
 			std::cout << i << "," << j << std::endl;
 			String *tempDesc = new String("TEMP");
 			Item *tempItem = new Item();
-			Vector2 tempV2 = { i,j };
-			Room rHolder = Room(tempDesc, tempItem, tempV2);
+			Vector2* tempV2 = new Vector2;
 
-			map[i][j] = rHolder;
+			tempV2->a = i;
+			tempV2->b = j;
+
+			Room rHolder(tempDesc, tempItem, tempV2);
+
+			map[mapIndex] = rHolder;
+
+
+			delete tempDesc;
+			delete tempItem;
+			delete tempV2;
 
 		}
 	}
+	
 	std::cout << "ALL DONE" << std::endl;
 	//map = &MapHolder;
 }
-*/
 
-const Room Game::GetRoomObject(const Vector2 vec2) 
+
+Room* Game::GetRoomObject(const Vector2 vec2) 
 {
 
 	int x = vec2.a;
 	int y = vec2.b;
 
-	size_t S = ((3 * x) + y);
+	size_t S = ((mapWidth * x) + y);
 
-	Room rHolder(map[S]);
+	Room* rHolder;
+	rHolder = &map[S];
 
 	return rHolder;
 
@@ -172,22 +191,25 @@ int Game::GetCommand()
 {
 	
 #ifdef _DEBUG_
-	std::cout << "GETCOMMAND fired" << std::endl;
+	std::cout << "GETCOMMAND fired\nFunction isolated.\n" << std::endl;
 #endif
 	std::cout << "Type new string into command line: ";
 
 
-	player->ReadFromConsoleToCommand();
-	String commandHolder = player->ReadFromCommandToString();
+	player->ReadCommandToCout();
+	
+	//player->WriteFromConsoleToCommand();
 
+	/*
 	String testStr("TEST");
+	String comHolder = player->GetCommand();
 
-	if (commandHolder.EqualTo(testStr))
+	if (comHolder.EqualTo(testStr))
 	{
 		std::cout << "IT WORKS";
 		return 0;
 	}
-	else if(commandHolder.EqualTo("north"))
+	else if(comHolder.EqualTo("north"))
 	{
 		std::cout << "MOVING NORTH" << std::endl;
 		return 0;
@@ -197,6 +219,7 @@ int Game::GetCommand()
 		std::cout << "It doesnt work" << std::endl;
 		return 1;
 	}
+	*/
 
 	return 1;
 
@@ -205,9 +228,7 @@ int Game::GetCommand()
 
 int Game::MovePlayer()
 {
-	Vector2 currentLoc = player->GetCurrentLocation();
-
-	
+	//Vector2 currentLoc = player->GetCurrentLocation();
 
 	return 0;
 }

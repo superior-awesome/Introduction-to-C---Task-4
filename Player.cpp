@@ -4,22 +4,38 @@
 
 Player::Player()
 {
+
 	currentLocation = new Vector2;
-	String intitiator("Empty");
-	command = intitiator;
+	
+	command = new String("None");
 
 	spells = new String[noOfSpells];
 
 }
 
 //	Destructor
-Player::~Player() = default;
+Player::~Player()
+{
+
+	delete currentLocation;
+
+	delete command;
+
+	delete[] spells;
+
+}
 
 //	Copy Constructor
 Player::Player(const Player& other)
 {
-	currentLocation = other.currentLocation;
+	currentLocation = new Vector2;
+	currentLocation->a = other.currentLocation->a;
+	currentLocation->b = other.currentLocation->b;
 
+	command = new String;
+	command = other.command;
+
+	spells = new String[noOfSpells];
 	for (int i = 0; i < noOfSpells; i++)
 	{
 		spells[i] = other.spells[i];
@@ -29,7 +45,18 @@ Player::Player(const Player& other)
 //Copy Assignmnet
 Player& Player::operator= (const Player other)
 {
-	currentLocation = other.currentLocation;
+	currentLocation->a = other.currentLocation->a;
+	currentLocation->b = other.currentLocation->b;
+
+	command = other.command;
+
+	if (spells != nullptr)
+	{
+		delete[] spells;
+	}
+
+	spells = new String[other.noOfSpells];
+	noOfSpells = other.noOfSpells;
 
 	for (int i = 0; i < noOfSpells; i++)
 	{
@@ -42,20 +69,21 @@ Player& Player::operator= (const Player other)
 //	Move
 Player::Player(Player&& other)
 {
+
 	currentLocation = other.currentLocation;
+	other.currentLocation = nullptr;
 
-	for (int i = 0; i < noOfSpells; i++)
-	{
-		spells[i] = other.spells[i];
-	}
-}
+	command = other.command;
+	other.command= nullptr;
 
-void Player::StartGame()
-{
+	spells = other.spells;
+	other.spells= nullptr;
 
 }
 
-Vector2 Player::GetCurrentLocation()
+
+
+Vector2 Player::GetCurrentLocation() const
 {
 	return (*currentLocation);
 }
@@ -66,7 +94,7 @@ void Player::SetCurrentLocation(Vector2 _newLoc)
 	currentLocation->b = _newLoc.b;
 }
 
-void Player::ReadFromConsoleToCommand()
+void Player::WriteFromConsoleToCommand()
 {
 
 	std::string strHolderBase;
@@ -74,18 +102,20 @@ void Player::ReadFromConsoleToCommand()
 	char arr[64];
 	std::cout << sizeof(arr) << std::endl;
 	strcpy_s(arr, sizeof(arr), strHolderBase.c_str());
-	String tempStr(arr);
+	String output(arr);
 
-	command = tempStr;
+	command = new String(output);
 
-	std::cout << "->";
-	command.WriteToConsole();
-	std::cout << std::endl;
 }
 
-const String Player::ReadFromCommandToString()
+void Player::ReadCommandToCout() const
 {
-	return command;
+	command->WriteToConsole();
+}
+
+String Player::GetCommand() const
+{
+	return *command;
 }
 
 String Player::FindSpell()

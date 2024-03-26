@@ -23,8 +23,6 @@ String::String()
 String::String(const char* _str)
 //	Constructor takes a pointer to a C-Style string.
 {
-
-
 	length = strlen(_str);
 	capacity = length + 1;
 	str = new char[capacity];
@@ -48,7 +46,8 @@ String::~String()
 //	Destructor.
 {
 
-	std::cout << "Desctroctor Run" << std::endl;
+
+
 	delete[] str;
 };
 
@@ -372,7 +371,16 @@ String& String::ReadFromConsole()
 String& String::WriteToConsole()
 //	Writes the contents of *str to console
 {
-	std::cout << str;
+
+	if (str != nullptr)
+	{
+		std::cout << str;
+	}
+	else
+	{
+		std::cout << "String is Empty";
+	}
+
 
 	return *this;
 

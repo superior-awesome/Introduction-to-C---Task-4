@@ -9,12 +9,17 @@ public:
 
 	Item();
 	~Item();
+	Item(Item& other);
 	Item& operator= (const Item& other);
+
+	Item(Item&& other);
+
+	Item& operator= (Item&& other);
 
 	void Description();
 	void Use();
-private:
 
+private:
 	String *descriptionText;
 
 };
