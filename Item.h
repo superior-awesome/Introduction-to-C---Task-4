@@ -19,8 +19,10 @@ public:
 	void Description();
 	void Use();
 
-private:
+protected:
 	String *descriptionText;
+
+
 
 };
 

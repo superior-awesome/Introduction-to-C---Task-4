@@ -10,6 +10,9 @@ Item::Item()
 // Destructor
 Item::~Item()
 {
+	std::cout << "Deleting: ";
+	descriptionText->WriteToConsole();
+	std::cout << std::endl;
 	delete descriptionText;
 };
 

@@ -11,21 +11,28 @@ Game::Game()
 	player = new Player;
 
 	const int numberOfRooms = mapWidth * mapHeight;
+	mapSize = numberOfRooms;
 	
-
-
-	map = new Room[4];
-	
-	//map = new Room[numberOfRooms];
+	map = new Room[numberOfRooms];
 
 	for (int i = 0; i < numberOfRooms; i++)
 	{
 		map[i].describeRoom();
 	}
 
-	//map = mapHolder;
 
-	std::cout << "X" << std::endl;
+	//	THE FOLLOWING CODE WORKS. ALL HAIL TOM, KIND OF CODE.
+
+	String* Bakery = new String("The room is a bakery, you can smell fresh breads an Donuts.");
+	Item* bakeryTemp = new BoxOfDonuts();
+	Vector2* V2Temp = new Vector2();
+
+	Room roomWithDonuts(Bakery, bakeryTemp, V2Temp);
+
+	map[1] = std::move(roomWithDonuts);
+
+	DescribeAllRooms();
+
 }
 
 //	Destructor
@@ -43,7 +50,7 @@ Game::Game(const Game& other)
 	player = new Player;
 	player = other.player;
 
-	size_t mapSize = other.mapWidth * other.mapHeight;
+	mapSize = other.mapWidth * other.mapHeight;
 
 	map = new Room[mapSize];
 	for (size_t i = 0; i < mapSize; i++)
@@ -64,9 +71,9 @@ Game& Game::operator=(const Game& other)
 	player = new Player;
 	player = other.player;
 
-	int MapSize = other.mapHeight * other.mapWidth;
-	map = new Room[MapSize];
-	for (int i = 0; i < (MapSize); i++)
+	mapSize = other.mapHeight * other.mapWidth;
+	map = new Room[mapSize];
+	for (int i = 0; i < (mapSize); i++)
 	{
 		map[i] = other.map[i];
 	}
@@ -107,16 +114,6 @@ void Game::Run()
 
 }
 
-int Game::Tick()
-{
-#ifdef _DEBUG_
-	std::cout << "TICK fired" << std::endl;
-#endif
-
-
-	return 0;
-}
-
 
 
 void Game::CreateMap()
@@ -147,6 +144,9 @@ void Game::CreateMap()
 
 		}
 	}
+
+
+
 	
 	std::cout << "ALL DONE" << std::endl;
 	//map = &MapHolder;
@@ -159,13 +159,21 @@ Room* Game::GetRoomObject(const Vector2 vec2)
 	int x = vec2.a;
 	int y = vec2.b;
 
-	size_t S = ((mapWidth * x) + y);
+	int S = ((mapWidth * x) + y);
 
-	Room* rHolder;
-	rHolder = &map[S];
+	if (S > mapSize || S < 0)
+	{
+		std::cout << "Error, incorrect map index requested in GetRomObject()" << std::endl;
+		return nullptr;
+	}
+	else
+	{
+		//Room* rHolder;
 
-	return rHolder;
-
+		Room* rHolder = &map[S];
+	
+		return rHolder;
+	}
 }
 
 int Game::UseRoomItem(Room* _room)
@@ -231,4 +239,12 @@ int Game::MovePlayer()
 	//Vector2 currentLoc = player->GetCurrentLocation();
 
 	return 0;
+}
+
+void Game::DescribeAllRooms()
+{
+	for (int i = 0; i < mapSize; i++)
+	{
+		map[i].describeRoom();
+	}
 }

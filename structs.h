@@ -9,6 +9,14 @@ public:
 	int a;
 	int b;
 
+	Vector2() = default;
+
+	Vector2(int _a, int _b)
+	{
+		a = _a;
+		b = _b;
+	}
+
 	void operator=(Vector2 _input)
 	{
 		a = _input.a;

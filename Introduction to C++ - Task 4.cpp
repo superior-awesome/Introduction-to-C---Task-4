@@ -21,10 +21,19 @@ int main()
    // SecondString = MainString;
 
 
-    Room* rHolder = currentGame.GetRoomObject({ 1,1 });; 
+    Room* rHolder = currentGame.GetRoomObject({ 10,1 });; 
+
+    std::cout << "\n" << rHolder;
 
     rHolder->useItem();
 
+    rHolder = currentGame.GetRoomObject({ 0,0 });;
+    std::cout << "\n" << rHolder;
+
+    rHolder->useItem();
+
+
+    currentGame.DescribeAllRooms();
 
     std::cout << "Goodbye World." << std::endl;
 

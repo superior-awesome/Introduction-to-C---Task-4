@@ -3,10 +3,10 @@
 #define _GAME_
 
 #include <iostream>
-//#include <string>
+
 
 #include "Room.h"
-#include "Player.h"
+#include "header.h"
 
 
 class Game
@@ -23,8 +23,6 @@ public:
 
 	void Run();
 
-	int Tick();
-
 	void CreateMap();
 
 	int GetMapHeight();
@@ -39,11 +37,15 @@ public:
 
 	int UseRoomItem(Room* _room);
 
+	void DescribeAllRooms();
+
+
 
 private:
 
-	const int mapWidth = 1;
+	const int mapWidth = 2;
 	const int mapHeight = 2; 
+	int mapSize;
 
 	Player *player;
 	Room *map;

@@ -1,7 +1,23 @@
 #pragma once
-#include "Item.h"
-class BoxOfDonuts :
-    public Item
+
+#ifndef _DONUTBOX_
+
+#define _DONUTBOX_
+
+
+
+
+class BoxOfDonuts : public Item
 {
+
+public:
+	BoxOfDonuts();
+	//~BoxOfDonuts();
+
+
+private:
+	bool DonutInTheBox;
+
 };
 
+#endif
