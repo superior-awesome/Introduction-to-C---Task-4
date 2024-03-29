@@ -48,6 +48,9 @@
     <ClCompile Include="DoorKnocker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sink.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="String.h">
@@ -84,6 +87,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DoorKnocker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sink.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -149,6 +149,7 @@
     <ClCompile Include="Lamp.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="Sink.cpp" />
     <ClCompile Include="String.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +159,7 @@
     <ClInclude Include="DoorKnocker.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="header.h" />
+    <ClInclude Include="Sink.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Lamp.h" />

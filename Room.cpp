@@ -116,16 +116,18 @@ Room::Room(Room&& other)
 void Room::describeRoom()
 {
 
-	//std::cout << "Room Being Described: ";
 	roomDesc->WriteToConsole();
+	std::cout << std::endl;
 	itemInRoom->Description();
+	std::cout << std::endl;
 	std::cout << std::endl;
 
 }
 
 int Room::useItem() 
 {
-	std::cout << "Empty Room, no items avaible" << std::endl;
+	
+	itemInRoom->Use();
 	
 	return 0;
 }
@@ -149,7 +151,7 @@ void Room::PrintDoorLocation()
 
 		if (doorCounter == (roomDoors->numberOfDoors - 1))
 		{
-			std::cout << ", and ";
+			std::cout << ", or ";
 		}
 		else
 		{
@@ -164,7 +166,7 @@ void Room::PrintDoorLocation()
 
 		if (doorCounter == (roomDoors->numberOfDoors - 1))
 		{
-			std::cout << ", and ";
+			std::cout << ", or ";
 		}
 		else
 		{
@@ -178,7 +180,7 @@ void Room::PrintDoorLocation()
 
 		if (doorCounter == (roomDoors->numberOfDoors - 1))
 		{
-			std::cout << ", and ";
+			std::cout << ", or ";
 		}
 		else
 		{

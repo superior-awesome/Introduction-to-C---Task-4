@@ -12,13 +12,12 @@ class BoxOfDonuts : public Item
 
 public:
 	BoxOfDonuts();
-	//~BoxOfDonuts();
 
 	void Use();
 
 
 private:
-	bool DonutInTheBox;
+	int numberOfDonuts;
 
 };
 

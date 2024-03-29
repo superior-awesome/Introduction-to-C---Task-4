@@ -11,7 +11,7 @@ class DoorKnocker : public Item
 	public:
 	DoorKnocker();
 
-	void Use();
+	void Use() override;
 };
 
 #endif

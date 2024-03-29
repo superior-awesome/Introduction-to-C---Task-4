@@ -49,12 +49,12 @@ Item& Item::operator= (Item&& other)
 
 
 void Item::Description() {
-	std::cout << "Item Being Described: ";
 	descriptionText->WriteToConsole();
-	std::cout << std::endl;
 }
 
 void Item::Use() {
+
+	std::cout << "There is no item in this room." << std::endl;
 
 }
 

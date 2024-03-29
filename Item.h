@@ -17,7 +17,8 @@ public:
 	Item& operator= (Item&& other);
 
 	void Description();
-	void Use();
+
+	virtual void Use();
 
 protected:
 	String *descriptionText;
