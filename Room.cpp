@@ -9,9 +9,11 @@ Room::Room()
 	itemInRoom = new Item;	
 
 	roomDesc = new String;
+
+	roomDoors = new Doors(true);
 }
 
-Room::Room(String* description, Item* item, Vector2* _roomLocation)
+Room::Room(String* description, Item* item, Vector2* _roomLocation, Doors* _roomDoors)
 {
 
 	roomLocation = new Vector2;
@@ -24,6 +26,9 @@ Room::Room(String* description, Item* item, Vector2* _roomLocation)
 	roomDesc = new String;
 	roomDesc = description;
 
+	roomDoors = new Doors;
+	roomDoors = _roomDoors;
+
 }
 
 //	Destructor
@@ -34,6 +39,8 @@ Room::~Room()
 	delete roomLocation;
 
 	delete itemInRoom;
+
+	delete roomDoors;
 }
 
 //	Copy Constructor
@@ -49,6 +56,9 @@ Room::Room(const Room& other)
 
 	roomDesc = new String;
 	roomDesc = other.roomDesc;	//This is the point of failure.
+
+	roomDoors = new Doors;
+	roomDoors = other.roomDoors;
 }
 
 //	Copy Operator
@@ -60,6 +70,8 @@ Room& Room::operator= (const Room& other)
 	roomDesc = other.roomDesc;	
 
 	itemInRoom= other.itemInRoom;
+
+	roomDoors = other.roomDoors;
 	
 	return *this;
 }
@@ -75,6 +87,9 @@ Room& Room::operator= (Room&& other)
 
 	itemInRoom = other.itemInRoom;
 	other.itemInRoom = nullptr;
+
+	roomDoors = other.roomDoors;
+	other.roomDoors = nullptr;
 
 	return *this;
 }
@@ -92,6 +107,19 @@ Room::Room(Room&& other)
 	itemInRoom = other.itemInRoom;
 	other.itemInRoom = nullptr;
 
+	roomDoors = other.roomDoors;
+	other.roomDoors = nullptr;
+
+
+}
+
+void Room::describeRoom()
+{
+
+	//std::cout << "Room Being Described: ";
+	roomDesc->WriteToConsole();
+	itemInRoom->Description();
+	std::cout << std::endl;
 
 }
 
@@ -102,12 +130,97 @@ int Room::useItem()
 	return 0;
 }
 
-void Room::describeRoom()
+int Room::GetnumberOfDoors()
 {
-	
-	std::cout << "Room Being Described: ";
-	roomDesc->WriteToConsole();
-	itemInRoom->Description();
-	std::cout << std::endl;
+	return roomDoors->numberOfDoors;
+}
+
+void Room::PrintDoorLocation()
+{
+	int doorCounter = 0;
+	if (roomDoors->numberOfDoors > 1)
+	{
+		std::cout << "You can go ";
+		if (roomDoors->North)
+		{
+			std::cout << "North";
+			doorCounter++;
+		}
+
+		if (doorCounter == (roomDoors->numberOfDoors - 1))
+		{
+			std::cout << ", and ";
+		}
+		else
+		{
+			std::cout << ", ";
+		}
+
+		if (roomDoors->South)
+		{
+			std::cout << "South";
+			doorCounter++;
+		}
+
+		if (doorCounter == (roomDoors->numberOfDoors - 1))
+		{
+			std::cout << ", and ";
+		}
+		else
+		{
+			std::cout << ", ";
+		}
+		if (roomDoors->East)
+		{
+			std::cout << "East";
+			doorCounter++;
+		}
+
+		if (doorCounter == (roomDoors->numberOfDoors - 1))
+		{
+			std::cout << ", and ";
+		}
+		else
+		{
+			std::cout << ", ";
+		}
+		if (roomDoors->West)
+		{
+			std::cout << "West";
+			doorCounter++;
+		}
+		std::cout << "?\n";
+	}
+	else {
+		
+			std::cout << "You can only go ";
+			if (roomDoors->North)
+			{
+				std::cout << "North.";
+				doorCounter++;
+			}
+
+			if (roomDoors->South)
+			{
+				std::cout << "South.";
+				doorCounter++;
+			}
+
+			if(roomDoors->East)
+			{
+				std::cout << "East.";
+				doorCounter++;
+			}
+
+
+			if (roomDoors->West)
+			{
+				std::cout << "West.";
+				doorCounter++;
+			}
+			std::cout << "\n";
+		
+	}
+
 
 }

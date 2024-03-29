@@ -12,7 +12,7 @@ class Room
 public:
 
 	Room();
-	Room(String* description, Item* item, Vector2* _roomLocation);
+	Room(String* description, Item* item, Vector2* _roomLocation, Doors* _roomDoors);
 
 	~Room();
 	Room(const Room& other);
@@ -21,10 +21,16 @@ public:
 	Room(Room&& other);
 
 
+
 	void describeRoom();
 
 	int useItem();
 
+	int GetnumberOfDoors();
+
+	void PrintDoorLocation();
+
+	Doors *roomDoors;
 
 private:
 
@@ -33,6 +39,7 @@ private:
 	Item *itemInRoom;
 		
 	Vector2 *roomLocation;
+
 };
 
 #endif //_ROOM_

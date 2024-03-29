@@ -19,6 +19,7 @@ public:
 	Player(const Player& other);
 	
 	Vector2 GetCurrentLocation() const;
+
 	void SetCurrentLocation(Vector2 _newLoc);
 
 	void WriteFromConsoleToCommand();

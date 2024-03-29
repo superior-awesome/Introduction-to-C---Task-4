@@ -14,6 +14,8 @@ public:
 	BoxOfDonuts();
 	//~BoxOfDonuts();
 
+	void Use();
+
 
 private:
 	bool DonutInTheBox;

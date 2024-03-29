@@ -53,4 +53,65 @@ public:
 	
 };
 
+class Doors
+{
+public:
+	bool North;
+	bool South;
+	bool East;
+	bool West;
+	int numberOfDoors;
+
+	Doors()
+	{
+		North = true;
+		South = true;
+		East = true;
+		West = true;
+		CountDoors();
+	};
+
+	Doors(bool input)
+	{
+		North = input;
+		South = input;
+		East = input;
+		West = input;
+		CountDoors();
+	};
+
+	Doors(bool _n, bool _s, bool _e, bool _w)
+	{
+		North = _n;
+		South = _s;
+		East = _e;
+		West = _w;
+		CountDoors();
+	};
+
+	void CountDoors()
+	{
+		numberOfDoors = 0;
+		if (North)
+		{
+			numberOfDoors++;
+		}
+		if (South)
+		{
+			numberOfDoors++;
+		}
+		if (East)
+		{
+			numberOfDoors++;
+		}
+		if (West)
+		{
+			numberOfDoors++;
+		}
+	}
+
+
+
+};
+
 #endif

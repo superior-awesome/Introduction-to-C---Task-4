@@ -21,7 +21,6 @@ public:
 	Game(Game&& other);
 	Game& operator= (Game&& other);
 
-	void Run();
 
 	void CreateMap();
 
@@ -29,22 +28,24 @@ public:
 
 	int GetMapWidth();
 
-	int GetCommand();
-
 	int MovePlayer();
 
 	Room* GetRoomObject(const Vector2 vec2);
 
 	int UseRoomItem(Room* _room);
 
+	void DescribeRoomByIndex(int index);
+
 	void DescribeAllRooms();
+
+	int Tick();
 
 
 
 private:
 
-	const int mapWidth = 2;
-	const int mapHeight = 2; 
+	const int mapWidth = 3;
+	const int mapHeight = 3; 
 	int mapSize;
 
 	Player *player;

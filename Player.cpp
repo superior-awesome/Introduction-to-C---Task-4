@@ -96,11 +96,11 @@ void Player::SetCurrentLocation(Vector2 _newLoc)
 
 void Player::WriteFromConsoleToCommand()
 {
-
+	std::cout << ": ";
 	std::string strHolderBase;
 	getline(std::cin, strHolderBase);
-	char arr[64];
-	std::cout << sizeof(arr) << std::endl;
+	char arr[128];
+	//std::cout << sizeof(arr) << std::endl;
 	strcpy_s(arr, sizeof(arr), strHolderBase.c_str());
 	String output(arr);
 
