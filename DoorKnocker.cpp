@@ -3,7 +3,7 @@
 
 DoorKnocker::DoorKnocker()
 	{
-		descriptionText = new String("The door knocker is heavy, smooth, and cold to the touch.");
+		descriptionText = new String("The door knocker is big and brass.");
 	}
 
 void DoorKnocker::Use()

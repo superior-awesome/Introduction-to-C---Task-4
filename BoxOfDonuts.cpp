@@ -5,7 +5,7 @@ BoxOfDonuts::BoxOfDonuts()
 {
 	
 	numberOfDonuts = 3;
-	descriptionText = new String("Your stomach spies a box with donuts inside.");
+	descriptionText = new String("Your stomach spies a box for donuts on the benchtop.");
 }
 
 void BoxOfDonuts::Use()
@@ -16,7 +16,7 @@ void BoxOfDonuts::Use()
 	{
 		std::cout << "You gulp down the last donut without realizing it, wiping your hands together to dust off the sugar." << std::endl;
 		delete descriptionText;
-		descriptionText = new String("There is empty box on the benchtop.");
+		descriptionText = new String("There is empty donut box on the benchtop.");
 
 	} else if (numberOfDonuts>0)
 	{

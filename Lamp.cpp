@@ -3,7 +3,7 @@
 Lamp::Lamp()
 {
 	lampIsOn = false;
-	descriptionText = new String("A short, squat, red lamp sits on the sidetable.");
+	descriptionText = new String("A squat, grey lamp sits on the sidetable. It could be an elephant but it is too ugly to be sure.");
 	SetLamp(false);
 	
 }
@@ -18,12 +18,12 @@ void Lamp::SetLamp(bool state)
 {
 	if (state)
 	{
-		std::cout <<"You are sick of the dark and fiddle with the lamp.A warm yellow pours down across the walls and your eyes slowly adjust to the ugle shaddows thrown." << std::endl;
+		std::cout <<"You fiddle with the lamp. A warm yellow pours down across the walls and your eyes slowly adjust to the shaddows." << std::endl;
 		lampIsOn = true;
 	}
 	else 
 	{
-		std::cout << "There is too much light, you reach for the switch and return to the dark quiet of the room." << std::endl;
+		std::cout << "You dont like the shadow shapes and reach for the switch. The lamp is now off." << std::endl;
 		lampIsOn = false;
 	}
 }

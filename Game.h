@@ -29,6 +29,7 @@ public:
 	int GetMapWidth();
 
 	int MovePlayer();
+	int MovePlayer(char _input);
 
 	Room* GetRoomObject(const Vector2 vec2);
 

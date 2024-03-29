@@ -226,3 +226,28 @@ void Room::PrintDoorLocation()
 
 
 }
+
+void Room::PrintDoorLocationFull()
+{
+	
+
+		if (roomDoors->North)
+		{
+			std::cout << "- Move North\n";
+		}
+		if (roomDoors->South)
+		{
+			std::cout << "- Move South\n";
+		}
+		if (roomDoors->East)
+		{
+			std::cout << "- Move East\n";
+		}
+		if (roomDoors->West)
+		{
+			std::cout << "- Move West\n";
+		}
+
+
+
+}

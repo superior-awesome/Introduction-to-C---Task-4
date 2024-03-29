@@ -29,6 +29,7 @@ public:
 	int GetnumberOfDoors();
 
 	void PrintDoorLocation();
+	void PrintDoorLocationFull();
 
 	Doors *roomDoors;
 

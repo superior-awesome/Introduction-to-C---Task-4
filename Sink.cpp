@@ -3,7 +3,7 @@
 
 Sink::Sink()
 {
-	descriptionText = new String("You can hear the sink dripping.");
+	descriptionText = new String("You can hear a sink dripping in the dark.");
 	sinkBroken = false;
 }
 
@@ -14,7 +14,7 @@ void Sink::Use()
 		std::cout << "You try to collect some water into your hand, but the dripping is too slow. You give up." << std::endl;
 	}
 	else {
-		std::cout << "Turn the tap to get some water but the handle comes off in your hand." << std::endl;
+		std::cout << "You turn the sink handle to get some water but it breaks off in your hand." << std::endl;
 		sinkBroken = true;
 	}
 }

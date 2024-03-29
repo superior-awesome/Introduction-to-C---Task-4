@@ -161,7 +161,7 @@ void Game::CreateMap()
 	// Room 5 - Living Room
 	
 	
-	String* desc_5 = new String("You are in a living room with a cold fireplace, lush rug, leather chairs and a tall bookshelf.");
+	String* desc_5 = new String("You are in a living room with a cold fireplace, lush rug, leather chairs, and a tall bookshelf.");
 	Item* item_5 = new Bookshelf;
 	Vector2* v2_5 = new Vector2(2, 1);
 	Doors* doors_5 = new Doors(true,false,false,true);
@@ -172,7 +172,7 @@ void Game::CreateMap()
 
 	// Room 6 - Kitchen
 	 
-	String* desc_6 = new String("The room is a kitchen, ");
+	String* desc_6 = new String("The room is a kitchen, old with a wood-stove and simple wooden furniture.");
 	Item* item_6 = new BoxOfDonuts();
 	Vector2* v2_6 = new Vector2(0, 2);
 	Doors* doors_6 = new Doors(false,true,true,false);
@@ -194,7 +194,7 @@ void Game::CreateMap()
 	
 	// Room 8 - Dining Room
 
-	String* desc_8 = new String("You are in a dining room. A think layer of is over everything.");
+	String* desc_8 = new String("You think this is a dining room, but the room's furniture is covered in a drop-cloth as if it were dressed as a ghost for haloween.");
 	Item* item_8 = new BoxOfDonuts;
 	Vector2* v2_8 = new Vector2(1, 2);
 	Doors* doors_8 = new Doors(false,true,false,true);
@@ -258,7 +258,7 @@ int Game::MovePlayer()
 
 	Room* currentRoom = &map[currentIndex];
 
-	std::cout << "Which way do you want to go." << std::endl;
+	std::cout << "Which way do you want to go (type a direction)." << std::endl;
 	currentRoom->PrintDoorLocation();
 		
 	player->WriteFromConsoleToCommand();
@@ -366,6 +366,116 @@ int Game::MovePlayer()
 	return 0;
 }
 
+int Game::MovePlayer(char _input)
+{
+
+	Vector2 currentLoc = player->GetCurrentLocation();
+
+	int currentIndex = (currentLoc.a + (mapHeight * currentLoc.b));
+
+	Room* currentRoom = &map[currentIndex];
+
+	if (_input == 'n')
+	{
+
+
+#ifdef _DEBUG_
+		std::cout << "Attempt to go north!" << std::endl;
+#endif
+
+		if (currentRoom->roomDoors->North)
+		{
+			Vector2 newLoc = currentLoc;
+			newLoc.b++;
+			player->SetCurrentLocation(newLoc);
+
+			int currentIndex = (newLoc.a + (mapHeight * newLoc.b));
+
+			map[currentIndex].describeRoom();
+
+		}
+		else {
+			std::cout << "Cannot move in that direction" << std::endl;
+		}
+	}
+	else if (_input == 's')
+	{
+
+#ifdef _DEBUG_
+		std::cout << "Attempt to go south!" << std::endl;
+#endif
+		if (currentRoom->roomDoors->South)
+		{
+			Vector2 newLoc = currentLoc;
+			newLoc.b--;
+			player->SetCurrentLocation(newLoc);
+
+			int currentIndex = (newLoc.a + (mapHeight * newLoc.b));
+
+			map[currentIndex].describeRoom();
+
+		}
+		else {
+			std::cout << "Cannot move in that direction" << std::endl;
+		}
+	}
+	else if (_input == 'e')
+	{
+
+
+#ifdef _DEBUG_
+		std::cout << "Attempt to go east!" << std::endl;
+#endif
+
+		if (currentRoom->roomDoors->East)
+		{
+			Vector2 newLoc = currentLoc;
+			newLoc.a++;
+			player->SetCurrentLocation(newLoc);
+
+			int currentIndex = (newLoc.a + (mapHeight * newLoc.b));
+
+			map[currentIndex].describeRoom();
+
+		}
+		else {
+			std::cout << "Cannot move in that direction" << std::endl;
+		}
+	}
+	else if (_input == 'w')
+	{
+
+#ifdef _DEBUG_
+		std::cout << "Attempt to go west!" << std::endl;
+#endif
+
+		if (currentRoom->roomDoors->West)
+		{
+			Vector2 newLoc = currentLoc;
+			newLoc.a--;
+			player->SetCurrentLocation(newLoc);
+
+			int currentIndex = (newLoc.a + (mapHeight * newLoc.b));
+
+			map[currentIndex].describeRoom();
+
+		}
+		else {
+			std::cout << "Cannot move in that direction" << std::endl;
+		}
+	}
+	else {
+
+		std::cout << "Command (";
+		player->GetCommand().WriteToConsole();
+		std::cout << ") is not recognised." << std::endl;
+	}
+
+
+
+	return 0;
+}
+
 
 
 void Game::DescribeAllRooms()
@@ -381,13 +491,48 @@ void Game::DescribeAllRooms()
 
 int Game::Tick()
 {
+
+
 	Vector2 v2holder = player->GetCurrentLocation();
-	std::cout << "Choose an action: (You are at "<< v2holder.a<<","<< v2holder.b<<")\n-Move\n-Look\n-Use\n-Quit\n";
+	std::cout << "Choose/Type an action:" << std::endl;
+	//std::cout <<"- Move\n";
+
+	int currentIndex = (v2holder.a + (mapHeight * v2holder.b));
+	Room* currentRoom = &map[currentIndex];
+	currentRoom->PrintDoorLocationFull();
+
+	std::cout <<"- Look\n- Use\n- Quit\n";
 	player->WriteFromConsoleToCommand();
+
+	system("CLS");
 
 	if (player->GetCommand().ToLower() == "move")
 	{
 		MovePlayer();
+		std::cout << std::endl;
+		return 0;
+	}
+	else if (player->GetCommand().ToLower() == "move north")
+	{
+		MovePlayer('n');
+		std::cout << std::endl;
+		return 0;
+	}
+	else if (player->GetCommand().ToLower() == "move south")
+	{
+		MovePlayer('s');
+		std::cout << std::endl;
+		return 0;
+	}
+	else if (player->GetCommand().ToLower() == "move east")
+	{
+		MovePlayer('e');
+		std::cout << std::endl;
+		return 0;
+	}
+	else if (player->GetCommand().ToLower() == "move west")
+	{
+		MovePlayer('w');
 		std::cout << std::endl;
 		return 0;
 	}
