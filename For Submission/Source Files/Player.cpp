@@ -1,6 +1,5 @@
 #include "Player.h"
 
-
 #include <iostream>
 
 Player::Player()
@@ -10,14 +9,9 @@ Player::Player()
 	
 	command = new String("None");
 
-	noOfSpells = 5;
-
-	spells = new Spell[5];
-
-	//InitialiseSpells();
+	spells = new String[noOfSpells];
 
 }
-
 
 //	Destructor
 Player::~Player()
@@ -41,11 +35,11 @@ Player::Player(const Player& other)
 	command = new String;
 	command = other.command;
 
-	//spells = new Spell[noOfSpells];
-	//for (int i = 0; i < noOfSpells; i++)
-	//{
-	//	spells[i] = other.spells[i];
-	//}
+	spells = new String[noOfSpells];
+	for (int i = 0; i < noOfSpells; i++)
+	{
+		spells[i] = other.spells[i];
+	}
 }
 
 //Copy Assignmnet
@@ -61,8 +55,8 @@ Player& Player::operator= (const Player other)
 		delete[] spells;
 	}
 
-	spells = new Spell[5];
-	//noOfSpells = other.noOfSpells;
+	spells = new String[other.noOfSpells];
+	noOfSpells = other.noOfSpells;
 
 	for (int i = 0; i < noOfSpells; i++)
 	{
@@ -82,11 +76,9 @@ Player::Player(Player&& other)
 	command = other.command;
 	other.command= nullptr;
 
-	for (int i = 0; i < noOfSpells; i++)
-	{
-		//spells[i] = other.spells[i];
-		//other.spells[i] = nullptr;
-	}
+	spells = other.spells;
+	other.spells= nullptr;
+
 }
 
 

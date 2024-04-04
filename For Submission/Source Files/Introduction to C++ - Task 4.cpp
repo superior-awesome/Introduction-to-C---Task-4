@@ -13,10 +13,11 @@ int main()
     bool gameRunning = true;
 
     std::cout << "----------------------------------------\n\n"
-        <<"You have been walking in the woods for hours but you think the Orcs have stopped their chase.\n"
-        <<"Your broad hat is flapping in the wink, keeping the rain off your face.\n"
+        <<"You have been walking in the woods for hours, a far longer hike than you planned.\n"
+        <<"In the dark of a sudden storm you lost your way and you fear you will never find \n"
+        <<"the carpark again.\n\n"
         <<"In a flash of approaching lightning, you see a house, a lodge in a clearing and \n"
-        << "drag your magic staff towards it.\n\n"
+        << "drag your feet towards it.\n\n"
         << "The cabin is tall but not wide. As you get closer your eyes adjust and you can \n"
         << "see it is made of thick logs holding a sharp slanted roof.\n\n"
         << "The dark forest behind you seems to receed as you step up onto the short porch \n"

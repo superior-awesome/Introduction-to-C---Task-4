@@ -1,6 +1,5 @@
 #pragma once
 #ifndef CUSTOM_STRING_HEADER
-
 #define CUSTOM_STRING_HEADER
 
 

@@ -116,7 +116,7 @@ void Game::CreateMap()
 	 
 	// Room 1 - Entrance
 	
-	String* desc_1 = new String("The door infront of you looks unlocked and youdetect no magic.");
+	String* desc_1 = new String("The door infront of you looks unlocked.");
 	Item* item_1 = new DoorKnocker;
 	Vector2* v2_1 = new Vector2(1,0);
 	Doors* doors_1 = new Doors(true, false, false, false);
@@ -138,7 +138,7 @@ void Game::CreateMap()
 
 	// Room 3 - Bathroom
 
-	String* desc_3 = new String("Moonlight from a high window bounces off tiles, illuminating a small clean washroom.");
+	String* desc_3 = new String("Moonlight from a high window bounces off tiles, illuminating a small clean bathroom.");
 	Item* item_3 = new Sink;
 	Vector2* v2_3 = new Vector2(0,1);
 	Doors* doors_3 = new Doors(false);
@@ -149,7 +149,7 @@ void Game::CreateMap()
 	
 	// Room 4 - Hallway 1
 	
-	String* desc_4 = new String("You are at the south end of a long hallway. \nYou see a lamp sitting nearby.");
+	String* desc_4 = new String("You are at the south end of a long hallway. \nYour backpack slumps against the wall, near to where a lamp is sitting.");
 	Item* item_4 = new Lamp;
 	Vector2* v2_4 = new Vector2(1,1);
 	Doors* doors_4 = new Doors(true);
@@ -172,7 +172,7 @@ void Game::CreateMap()
 
 	// Room 6 - Kitchen
 	 
-	String* desc_6 = new String("You are in a kitchen, with a wood-stove, simple wooden furniture, and pans hangining against the far wall.");
+	String* desc_6 = new String("The room is a kitchen, old with a wood-stove and simple wooden furniture.");
 	Item* item_6 = new BoxOfDonuts();
 	Vector2* v2_6 = new Vector2(0, 2);
 	Doors* doors_6 = new Doors(false,true,true,false);

@@ -1,11 +1,8 @@
-#pragma once
-
 #ifndef _PLAYER_
 #define _PLAYER_
 
-#include "header.h"
+
 #include "String.h"
-#include "Spell.h"
 #include "structs.h"
 #include <string>
 
@@ -20,7 +17,7 @@ public:
 	Player(Player&& other);
 
 	Player(const Player& other);
-
+	
 	Vector2 GetCurrentLocation() const;
 
 	void SetCurrentLocation(Vector2 _newLoc);
@@ -34,14 +31,13 @@ public:
 
 private:
 
+	int noOfSpells = 3;
 
-	int noOfSpells;
+	Vector2 *currentLocation;
 
-	Vector2* currentLocation;
-
-	String* command;
-
-	Spell* spells;
+	String *command;
+	
+	String *spells;
 
 };
 

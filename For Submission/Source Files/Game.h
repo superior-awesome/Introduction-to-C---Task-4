@@ -8,7 +8,6 @@
 #include "Room.h"
 #include "header.h"
 
-class Player;
 
 class Game
 {
@@ -21,6 +20,7 @@ public:
 	Game& operator=(const Game& other);
 	Game(Game&& other);
 	Game& operator= (Game&& other);
+
 
 	void CreateMap();
 
@@ -40,6 +40,8 @@ public:
 	void DescribeAllRooms();
 
 	int Tick();
+
+
 
 private:
 

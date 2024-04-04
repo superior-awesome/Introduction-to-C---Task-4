@@ -23,7 +23,6 @@
 #include "DoorKnocker.h"
 #include "Bookshelf.h"
 #include "Room.h"
-#include "Spell.h"
 
 
 

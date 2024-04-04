@@ -150,7 +150,6 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="Sink.cpp" />
-    <ClCompile Include="Spell.cpp" />
     <ClCompile Include="String.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,7 +160,6 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="header.h" />
     <ClInclude Include="Sink.h" />
-    <ClInclude Include="Spell.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Lamp.h" />
