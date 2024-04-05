@@ -165,11 +165,15 @@ int Player::BinarySearchForSpell(String _input)
 	int MPoint = (LBounds - RBounds)/2;
 
 	std::string _Str_T = _input.ToLower().CStr(); //  T for Target
+	std::string _CStr_M;
 	
 	MPoint = (RBounds + LBounds)/2;
 
-	while ((RBounds - LBounds) > 1)
+	while (RBounds - LBounds >1)
 	{
+
+#define _DEBUG_
+
 #ifdef _DEBUG_
 		std::cout << "( L:" << LBounds <<" - M:" << MPoint << " - R:" << RBounds << " )\n";
 #endif
@@ -177,24 +181,37 @@ int Player::BinarySearchForSpell(String _input)
 		String _Str_M = spells[MPoint].GetName(); // M for Midpoint
 		_Str_M.ToLower();
 
-		std::string _CStr_M = _Str_M.CStr();
+		_CStr_M = _Str_M.CStr();
 
-		if (_Str_T < _CStr_M)
+
+		if (_Str_T == _CStr_M)
 		{
-			RBounds = MPoint;
+			std::cout << "SPELL FOUND" << std::endl;
+			return 0;
+		}
+		else if (_Str_T < _CStr_M)
+		{
+			RBounds = MPoint+1;
 			MPoint = (RBounds + LBounds)/ 2;
 
-
-		} else if (_Str_T > _CStr_M)
+		} 
+		else if (_Str_T > _CStr_M)
 		{
-			LBounds = MPoint;
+			LBounds = MPoint-1;
 			MPoint = (RBounds + LBounds)/2;
 		}
-		else if (_Str_T == _CStr_M)
-		{
-			RBounds = LBounds;
-		}
+		
 	}
 
-	return -1;
+	if (_Str_T == _CStr_M)
+	{
+		std::cout << "SPELL FOUND" << std::endl;
+		return 0;
+	}
+	else
+	{
+
+		std::cout << "SPELL NOT FOUND" << std::endl;
+		return -1;
+	}
 }
