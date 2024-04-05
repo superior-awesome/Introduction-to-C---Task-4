@@ -32,10 +32,16 @@ public:
 
 	String GetCommand() const;
 
+	void InitialiseSpells();
+
+	void PrintSpells();
+
+	int BinarySearchForSpell(String _input);
+
 private:
 
 
-	int noOfSpells;
+	int const noOfSpells = 10;
 
 	Vector2* currentLocation;
 

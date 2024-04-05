@@ -23,7 +23,6 @@ int main()
         << "glad to be out of the wind even for a moment.\n\n"
         << "You swat away a nest of spider webs and take a breath.\n\n";
 
-   // currentGame.DescribeAllRooms();
 
     while (gameRunning)
     {

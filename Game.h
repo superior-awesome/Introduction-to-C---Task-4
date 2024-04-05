@@ -41,6 +41,8 @@ public:
 
 	int Tick();
 
+	void PrintSpells_G();
+
 private:
 
 	const int mapWidth = 3;

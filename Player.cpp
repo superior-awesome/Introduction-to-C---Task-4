@@ -2,6 +2,7 @@
 
 
 #include <iostream>
+#include <ctype.h>
 
 Player::Player()
 {
@@ -10,11 +11,11 @@ Player::Player()
 	
 	command = new String("None");
 
-	noOfSpells = 5;
+	//noOfSpells = 5;
 
-	spells = new Spell[5];
+	spells = new Spell[noOfSpells];
 
-	//InitialiseSpells();
+	InitialiseSpells();
 
 }
 
@@ -131,4 +132,69 @@ String Player::FindSpell()
 	String dummy;
 
 	return dummy;
+}
+
+void Player::InitialiseSpells() {
+
+	spells[0] = Spell(-2,"Eclipse","The cabin shaddows lengthen as you consume what light you can from around you, healing slightly.");
+	spells[1] = Spell(5,"Eruption","Your hands blaze into flames, although you dont want to damage anything, you appreciate the warmth and the light while you can sustain it.");
+	spells[2] = Spell(-5,"Frostbite","*You are not afflicted with frostbite and cannot cast this healling spell.*");
+	spells[3] = Spell(0,"Levitate","You lift up off the ground by a few centimeters, very kind of you not to track mud through the cabin.");
+	spells[4] = Spell(0,"Mirage","A perfect copy of you steps off your body, like a snakeskin or a glove, and starts to inspect the ceiling.");
+	spells[5] = Spell(0,"Petrify","Your body hardens and freezes in place. You realise that this wont help you search the house, and you revert to your normal self.");
+	spells[6] = Spell(0,"Polymorph","You turn yourself into a sheep. This will wear off in 24 hours.");
+	spells[7] = Spell(0,"Teleport","Without knowing what way to teleport, you could end up back in the woods and decide to stay under cover.");
+	spells[8] = Spell(3,"Thunderwave","Clapping your hands in front of you, papers dust and furniture push and swim through the air around you.");
+	spells[9] = Spell(7,"Vortex","You spin with your hands outreached, you can hear the rain outside the house being lifted and pushed away until you feel dizzy and stop.");
+
+
+}
+
+void Player::PrintSpells() {
+	for (int i = 0; i < noOfSpells; i++)
+	{
+		spells[i].Describe();
+	}
+}
+
+int Player::BinarySearchForSpell(String _input)
+{
+
+	int LBounds = 0;
+	int RBounds = noOfSpells;
+	int MPoint = (LBounds - RBounds)/2;
+
+	std::string _Str_T = _input.ToLower().CStr(); //  T for Target
+	
+	MPoint = (RBounds + LBounds)/2;
+
+	while ((RBounds - LBounds) > 1)
+	{
+#ifdef _DEBUG_
+		std::cout << "( L:" << LBounds <<" - M:" << MPoint << " - R:" << RBounds << " )\n";
+#endif
+
+		String _Str_M = spells[MPoint].GetName(); // M for Midpoint
+		_Str_M.ToLower();
+
+		std::string _CStr_M = _Str_M.CStr();
+
+		if (_Str_T < _CStr_M)
+		{
+			RBounds = MPoint;
+			MPoint = (RBounds + LBounds)/ 2;
+
+
+		} else if (_Str_T > _CStr_M)
+		{
+			LBounds = MPoint;
+			MPoint = (RBounds + LBounds)/2;
+		}
+		else if (_Str_T == _CStr_M)
+		{
+			RBounds = LBounds;
+		}
+	}
+
+	return -1;
 }

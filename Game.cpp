@@ -501,7 +501,7 @@ int Game::Tick()
 	Room* currentRoom = &map[currentIndex];
 	currentRoom->PrintDoorLocationFull();
 
-	std::cout <<"- Move\n- Look\n- Use\n- Quit\n";
+	std::cout <<"- Move\n- Look\n- Use\n- Use Spell\n- Quit\n";
 	player->WriteFromConsoleToCommand();
 
 	system("CLS");
@@ -546,6 +546,17 @@ int Game::Tick()
 		std::cout << std::endl;
 		return 0;
 	}
+	else if (player->GetCommand().ToLower() == "use spell")
+	{
+		PrintSpells_G();
+		std::cout << "\nWhat spell would you like to use?" << std::endl;
+		player->WriteFromConsoleToCommand();
+		player->BinarySearchForSpell(player->GetCommand());
+
+
+
+		return 0;
+	}
 	else if(player->GetCommand().ToLower() == "use")
 	{
 		Vector2 currentLoc = player->GetCurrentLocation();
@@ -567,3 +578,10 @@ int Game::Tick()
 		return 0;
 	}
 }
+
+void Game::PrintSpells_G()
+{
+	player->PrintSpells();
+}
+
+
