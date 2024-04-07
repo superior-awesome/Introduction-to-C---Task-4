@@ -115,18 +115,14 @@ Room::Room(Room&& other)
 
 void Room::describeRoom()
 {
-
 	roomDesc->WriteToConsole();
 	std::cout << std::endl;
 	itemInRoom->Description();
 	std::cout << std::endl;
-	std::cout << std::endl;
-
 }
 
 int Room::useItem() 
 {
-	
 	itemInRoom->Use();
 	
 	return 0;
@@ -194,7 +190,6 @@ void Room::PrintDoorLocation()
 		std::cout << "?\n";
 	}
 	else {
-		
 			std::cout << "You can only go ";
 			if (roomDoors->North)
 			{
@@ -214,23 +209,19 @@ void Room::PrintDoorLocation()
 				doorCounter++;
 			}
 
-
 			if (roomDoors->West)
 			{
 				std::cout << "West.";
 				doorCounter++;
 			}
 			std::cout << "\n";
-		
 	}
-
 
 }
 
 void Room::PrintDoorLocationFull()
 {
 	
-
 		if (roomDoors->North)
 		{
 			std::cout << "- Move North\n";
@@ -247,7 +238,5 @@ void Room::PrintDoorLocationFull()
 		{
 			std::cout << "- Move West\n";
 		}
-
-
 
 }

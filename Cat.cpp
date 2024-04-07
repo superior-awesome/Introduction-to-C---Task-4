@@ -16,15 +16,13 @@ void Cat::Use()
 
 		delete descriptionText;
 		descriptionText = new String("The room is silent, you feel the cat's eyes warding you away.");
-
 	}
 	else
 	{
-		std::cout << "You put your hand down and step away from teh chair. The cat returns to its purring." << std::endl;
+		std::cout << "You step away. The cat returns to its purring." << std::endl;
 		purring = true;
 		
 		delete descriptionText;
 		descriptionText = new String("The cat is purring softly.");
-
 	}
 }

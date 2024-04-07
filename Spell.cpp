@@ -7,7 +7,6 @@ Spell::Spell()
 	useDescription = String("NoSpell-Description");
 };
 
-
 Spell::Spell(int _damage, String string)
 {
 	damage = _damage;
@@ -28,9 +27,10 @@ void Spell::Cast()
 	name.WriteToConsole();
 	std::cout << std::endl;
 	useDescription.WriteToConsole();
+	std::cout << std::endl;
 	if (damage > 0)
 	{
-		std::cout << "\nYou do" << damage << " points of damage.\n";
+		std::cout << "You do " << damage << " points of damage.\n";
 	}
 	else if (damage < 0)
 	{
@@ -38,6 +38,8 @@ void Spell::Cast()
 		std::cout << "You heals " << healholder << " points of Health.\n";
 
 	}
+
+	std::cout << std::endl;
 };
 
 void Spell::Describe()
@@ -87,12 +89,11 @@ bool const Spell::Compare(Spell & spellA, Spell& spellB)
 Spell& Spell::operator=(const Spell& _spl)
 //	Overloads the = operator to copy the rhs object to the lhs object.
 {
-
 	name = _spl.name;
 	damage = _spl.damage;
+	useDescription = _spl.useDescription;
 
 	return *this;
-
 }
 
 std::string Spell::GetCString()

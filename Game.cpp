@@ -3,16 +3,10 @@
 
 Game::Game()
 {
-
 	CreateMap();
 
 	player = new Player;
 	player->SetCurrentLocation({1,0}); 
-
-
-	
-	//DescribeAllRooms();
-
 }
 
 //	Destructor
@@ -26,7 +20,6 @@ Game::~Game()
 //	Copy Constructor
 Game::Game(const Game& other)
 {
-
 	player = new Player;
 	player = other.player;
 
@@ -43,7 +36,6 @@ Game::Game(const Game& other)
 //	Copy Assignment
 Game& Game::operator=(const Game& other)
 {
-
 	if (player != nullptr)
 	{
 		delete player;
@@ -64,20 +56,17 @@ Game& Game::operator=(const Game& other)
 //	Move
 Game::Game(Game&& other)
 {
-
 	player = other.player;
 	other.player = nullptr;
 
 	map = other.map;
 	other.map = nullptr;
 
-
 }
 
 //	move Assignement
 Game& Game::operator= (Game&& other)
 {
-
 	player = other.player;
 	other.player = nullptr;
 
@@ -85,7 +74,6 @@ Game& Game::operator= (Game&& other)
 	other.map = nullptr;
 
 	return *this;
-
 }
 
 void Game::DescribeRoomByIndex(int index)
@@ -97,7 +85,6 @@ void Game::DescribeRoomByIndex(int index)
 
 void Game::CreateMap()
 {
-
 	const int numberOfRooms = mapWidth * mapHeight;
 	mapSize = numberOfRooms;
 
@@ -116,7 +103,7 @@ void Game::CreateMap()
 	 
 	// Room 1 - Entrance
 	
-	String* desc_1 = new String("The door infront of you looks unlocked and youdetect no magic.");
+	String* desc_1 = new String("You stand on a stoop, door looks unlocked and you dont detect magic inside.");
 	Item* item_1 = new DoorKnocker;
 	Vector2* v2_1 = new Vector2(1,0);
 	Doors* doors_1 = new Doors(true, false, false, false);
@@ -141,7 +128,7 @@ void Game::CreateMap()
 	String* desc_3 = new String("Moonlight from a high window bounces off tiles, illuminating a small clean washroom.");
 	Item* item_3 = new Sink;
 	Vector2* v2_3 = new Vector2(0,1);
-	Doors* doors_3 = new Doors(false);
+	Doors* doors_3 = new Doors(false,false,true,false);
 
 	Room room_3(desc_3, item_3, v2_3, doors_3);
 
@@ -149,7 +136,7 @@ void Game::CreateMap()
 	
 	// Room 4 - Hallway 1
 	
-	String* desc_4 = new String("You are at the south end of a long hallway. \nYou see a lamp sitting nearby.");
+	String* desc_4 = new String("You are at the south end of a long hallway, a lamp sits nearby.");
 	Item* item_4 = new Lamp;
 	Vector2* v2_4 = new Vector2(1,1);
 	Doors* doors_4 = new Doors(true);
@@ -175,7 +162,7 @@ void Game::CreateMap()
 	String* desc_6 = new String("You are in a kitchen, with a wood-stove, simple wooden furniture, and pans hangining against the far wall.");
 	Item* item_6 = new BoxOfDonuts();
 	Vector2* v2_6 = new Vector2(0, 2);
-	Doors* doors_6 = new Doors(false,true,true,false);
+	Doors* doors_6 = new Doors(false,false,true,false);
 
 	Room room_6(desc_6, item_6, v2_6, doors_6);
 
@@ -183,7 +170,7 @@ void Game::CreateMap()
 	 
 	// Room 7 - Hallway 2
 	
-	String* desc_7 = new String("You are at the north end of a long hallway. A cat sits on a chair at the end of the hall watching you drip water.");
+	String* desc_7 = new String("You are at the north end of a long hallway. A cat sits on a chair at the end of the hall, watching you.");
 	Item* item_7 = new Cat;
 	Vector2* v2_7 = new Vector2(1,2);
 	Doors* doors_7 = new Doors(false,true,true,true);
@@ -194,7 +181,7 @@ void Game::CreateMap()
 	
 	// Room 8 - Dining Room
 
-	String* desc_8 = new String("You think this is a dining room, but the room's furniture is clothed in a dusty drop-cloth so cant be sure.");
+	String* desc_8 = new String("You think this is a dining room, but the furniture is covered in drop-cloths, so you can't be sure.");
 	Item* item_8 = new BoxOfDonuts;
 	Vector2* v2_8 = new Vector2(1, 2);
 	Doors* doors_8 = new Doors(false,true,false,true);
@@ -216,7 +203,7 @@ Room* Game::GetRoomObject(const Vector2 vec2)
 
 	if (S > mapSize || S < 0)
 	{
-		std::cout << "Error, incorrect map index requested in GetRomObject()->" << S<< std::endl;
+		std::cout << "Error, incorrect map index requested in GetRoomObject()->" << S<< std::endl;
 		return nullptr;
 	}
 	else
@@ -551,11 +538,10 @@ int Game::Tick()
 		PrintSpells_G();
 		std::cout << "\nWhat spell would you like to use?" << std::endl;
 		player->WriteFromConsoleToCommand();
-		player->BinarySearchForSpell(player->GetCommand());
-
-
-
+		system("CLS");
+		player->FindSpell();
 		return 0;
+
 	}
 	else if(player->GetCommand().ToLower() == "use")
 	{

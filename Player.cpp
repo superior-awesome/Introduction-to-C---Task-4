@@ -11,8 +11,6 @@ Player::Player()
 	
 	command = new String("None");
 
-	//noOfSpells = 5;
-
 	spells = new Spell[noOfSpells];
 
 	InitialiseSpells();
@@ -43,10 +41,10 @@ Player::Player(const Player& other)
 	command = other.command;
 
 	//spells = new Spell[noOfSpells];
-	//for (int i = 0; i < noOfSpells; i++)
-	//{
-	//	spells[i] = other.spells[i];
-	//}
+	for (int i = 0; i < noOfSpells; i++)
+	{
+		spells[i] = other.spells[i];
+	}
 }
 
 //Copy Assignmnet
@@ -85,8 +83,7 @@ Player::Player(Player&& other)
 
 	for (int i = 0; i < noOfSpells; i++)
 	{
-		//spells[i] = other.spells[i];
-		//other.spells[i] = nullptr;
+		spells[i] = other.spells[i];
 	}
 }
 
@@ -109,7 +106,6 @@ void Player::WriteFromConsoleToCommand()
 	std::string strHolderBase;
 	getline(std::cin, strHolderBase);
 	char arr[128];
-	//std::cout << sizeof(arr) << std::endl;
 	strcpy_s(arr, sizeof(arr), strHolderBase.c_str());
 	String output(arr);
 
@@ -127,26 +123,34 @@ String Player::GetCommand() const
 	return *command;
 }
 
-String Player::FindSpell()
+bool Player::FindSpell()
 {
-	String dummy;
+	int i = BinarySearchForSpell(GetCommand());
 
-	return dummy;
+	if(i != -1){
+		spells[i].Cast();
+		return true;
+	}
+	else
+	{
+		std::cout << "You do not know that spell." << std::endl;
+		return false;
+	};
+
 }
 
 void Player::InitialiseSpells() {
 
-	spells[0] = Spell(-2,"Eclipse","The cabin shaddows lengthen as you consume what light you can from around you, healing slightly.");
-	spells[1] = Spell(5,"Eruption","Your hands blaze into flames, although you dont want to damage anything, you appreciate the warmth and the light while you can sustain it.");
-	spells[2] = Spell(-5,"Frostbite","*You are not afflicted with frostbite and cannot cast this healling spell.*");
-	spells[3] = Spell(0,"Levitate","You lift up off the ground by a few centimeters, very kind of you not to track mud through the cabin.");
-	spells[4] = Spell(0,"Mirage","A perfect copy of you steps off your body, like a snakeskin or a glove, and starts to inspect the ceiling.");
-	spells[5] = Spell(0,"Petrify","Your body hardens and freezes in place. You realise that this wont help you search the house, and you revert to your normal self.");
+	spells[0] = Spell(-2,"Eclipse","You siphon what light you can from around you, healing slightly.");
+	spells[1] = Spell(5,"Eruption","Your hands burst aflame, you enjoy the warmth while you can sustain it.");
+	spells[2] = Spell(-5,"Frostbite","You heal your numb toes, staving off frostbite.");
+	spells[3] = Spell(0,"Levitate","You lift up off the ground to avoid walking mud through the cabin.");
+	spells[4] = Spell(0,"Mirage","You shed a translucent ghost which starts to explore the dark cabin.");
+	spells[5] = Spell(0,"Petrify","You pull a scary face, nobody is there to react.");
 	spells[6] = Spell(0,"Polymorph","You turn yourself into a sheep. This will wear off in 24 hours.");
-	spells[7] = Spell(0,"Teleport","Without knowing what way to teleport, you could end up back in the woods and decide to stay under cover.");
-	spells[8] = Spell(3,"Thunderwave","Clapping your hands in front of you, papers dust and furniture push and swim through the air around you.");
-	spells[9] = Spell(7,"Vortex","You spin with your hands outreached, you can hear the rain outside the house being lifted and pushed away until you feel dizzy and stop.");
-
+	spells[7] = Spell(0,"Teleport","*Cannot telleport while in danger* - Spell unavailable.");
+	spells[8] = Spell(3,"Thunderwave","You cast lightning-wave from your hands, and than wait until thunderwave is cast.");
+	spells[9] = Spell(7,"Vortex","All the furniture in the room is pushed away from you.");
 
 }
 
@@ -161,7 +165,7 @@ int Player::BinarySearchForSpell(String _input)
 {
 
 	int LBounds = 0;
-	int RBounds = noOfSpells;
+	int RBounds = noOfSpells-1;
 	int MPoint = (LBounds - RBounds)/2;
 
 	std::string _Str_T = _input.ToLower().CStr(); //  T for Target
@@ -169,10 +173,12 @@ int Player::BinarySearchForSpell(String _input)
 	
 	MPoint = (RBounds + LBounds)/2;
 
-	while (RBounds - LBounds >1)
+	bool searching = true;
+
+	while (searching)
 	{
 
-#define _DEBUG_
+//#define _DEBUG_
 
 #ifdef _DEBUG_
 		std::cout << "( L:" << LBounds <<" - M:" << MPoint << " - R:" << RBounds << " )\n";
@@ -186,32 +192,26 @@ int Player::BinarySearchForSpell(String _input)
 
 		if (_Str_T == _CStr_M)
 		{
-			std::cout << "SPELL FOUND" << std::endl;
-			return 0;
+			return MPoint;
+		}
+		else if (RBounds <= LBounds)
+		{
+			searching = false;
+			return -1;
+			
 		}
 		else if (_Str_T < _CStr_M)
 		{
-			RBounds = MPoint+1;
+			RBounds = MPoint-1;
 			MPoint = (RBounds + LBounds)/ 2;
 
 		} 
 		else if (_Str_T > _CStr_M)
 		{
-			LBounds = MPoint-1;
+			LBounds = MPoint+1;
 			MPoint = (RBounds + LBounds)/2;
 		}
-		
 	}
+	return -1;
 
-	if (_Str_T == _CStr_M)
-	{
-		std::cout << "SPELL FOUND" << std::endl;
-		return 0;
-	}
-	else
-	{
-
-		std::cout << "SPELL NOT FOUND" << std::endl;
-		return -1;
-	}
 }

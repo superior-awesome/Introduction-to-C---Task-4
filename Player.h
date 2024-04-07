@@ -28,7 +28,7 @@ public:
 	void WriteFromConsoleToCommand();
 	void ReadCommandToCout() const;
 
-	String FindSpell();
+	bool FindSpell();
 
 	String GetCommand() const;
 
